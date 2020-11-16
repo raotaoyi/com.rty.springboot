@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head >
+	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+
+	<title>管理后台 | 登录</title>
+
+	
+</head>
+<body class="hold-transition login-page">
+
+<form action="/ShiroJWT/auth/token" method="post" enctype="application/json">
+	<p>UserName: <input type="text" name="username" /></p>
+	<p>Password: <input type="text" name="password" /></p>
+	<input type="button" value="Submit" />
+</form>
+
+</body>
+
+</html>

@@ -1,0 +1,90 @@
+1，jpa
+2，redis
+3，swagger
+4，cache
+5，Thymeleaf和freemarker
+
+反射:
+JAVA反射机制是在运行状态中，对于任意一个类，都能够知道这个类的所有属性和方法；
+对于任意一个对象，都能够调用它的任意一个方法和属性；
+这种动态获取的信息以及动态调用对象的方法的功能称为java语言的反射机制。
+
+Spring-Boot2.0新特性
+编程语言：Java8+ ,Kotlin
+底层框架：Spring Framwork5.0x
+全新特性：Web Flux
+              1，函数式编程：Java Lambda
+			  2，响应编程：Reactive Streams
+			  3，异步编程：Servlet3.1或Asyc NIO
+			  
+注解：
+注解本身不做任何事情，只是像xml文件一样起到配置作用。注解代表的是某种业务意义，
+注解背后处理器的工作原理如上源码实现：首先解析所有属性，判断属性上是否存在指定注解
+如果存在则根据搜索规则取得bean，然后利用反射原理注入。如果标注在字段上面，也可以通过字段的反射技术取得注解，
+根据搜索规则取得bean，然后利用反射技术注入。
+
+读取配置文件：
+SpringBoot配置文件可以使用yml格式和properties格式
+
+分别的默认命名为：application.yml、application.properties 官网都是以yml作为参考，层级结构更清晰的一种配置文件
+
+SpringBoot配置文件默认可以放到以下目录中，下面四种可以自动读取到：
+
+1、项目根目录下
+
+2、项目根目录中config目录下
+
+3、项目的resources目录下
+
+4、项目resources目录中config目录下
+
+也可以指定目录 ?***/config
+
+如果在不同的目录中存在多个配置文件，它的读取顺序是：
+
+1、config/application.properties（项目根目录中config目录下）
+
+2、config/application.yml
+
+3、application.properties（项目根目录下）
+
+4、application.yml
+
+5、resources/config/application.properties（项目resources目录中config目录下）
+
+6、resources/config/application.yml
+
+7、resources/application.properties（项目的resources目录下）
+
+8、resources/application.yml
+
+注意
+
+1、如果同一个目录下，有application.yml也有application.properties，默认先读取application.properties。
+
+2、如果同一个配置属性，在多个配置文件都配置了，默认使用第1次读取到的，后面读取的不覆盖前面读取到的。
+
+3、创建SpringBoot项目时，一般的配置文件放置在“项目的resources目录下”
+
+如果是其他名称的配置文件也可以在启动的时候配置：--spring.config.name = aaa ?来加载aaa配置文件，或者通过--spring.config.location来加载不同目录的配置文件。在初期需要根据 spring.config.name? 和 spring.config.location? 决定加
+
+载哪个文件，所以它们必须定义为environment属性（通常为OS env，系统属性或命令行参数）
+
+Springboot加载页面
+springboot项目默认将加载页面路径是classpath下面的templates和static文件
+
+ModelMap
+ModelMap对象主要用于传递控制方法处理数据到结果页面，也就是说我们把结果页面上需要的数据放到ModelMap对象中即可，他的作用类似于request对象的setAttribute方法的作用，用来在一个请求过程中传递处理的数据。通过以下方法向页面传递参数：?
+addAttribute(String key,Object value);
+
+过滤器和拦截器
+1，tomacat-->过滤器--->servlet-->拦截器--->controller
+2，事实上调用Servlet的doService()方法是在chain.doFilter(request, response);这个方法中进行的。
+
+
+日志管理
+1如果配置文件 logback-test.xml 和 logback.xml 都不存在，那么 logback 默认地会调用BasicConfigurator ，
+创建一个最小化配置。最小化配置由一个关联到根 logger 的ConsoleAppender 组成。输出用模式为%d{HH:mm:ss.SSS} [%thread] %-5level %logger{36} - %msg%n 的 PatternLayoutEncoder 进行格式化
+。root logger 默认级别是 DEBUG。
+
+springboot项目中，最好不要在子包中给版本号，因为父包中的版本号容易和子包中的版本冲突

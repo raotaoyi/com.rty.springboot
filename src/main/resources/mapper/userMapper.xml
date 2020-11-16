@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//ibatis.apache.org//DTD Mapper 3.0//EN"
+        "http://ibatis.apache.org/dtd/ibatis-3-mapper.dtd">
+<mapper namespace="com.rty.springboot.web.mapper.UserMapper">
+
+
+    <select id="getUser" resultType="com.rty.springboot.bean.UserInfo"
+            parameterType="string" >
+        select * from user where name=#{username}
+    </select>
+
+    <!--
+<select>
+    select * from t_mc_job_info where register_key in
+    <foreach collection="registerKeys" item="item" index="index"
+    open="(" separator="," close=")">
+        #{item}
+    </foreach>
+</select>
+
+<select>
+    select * from
+    (
+    <foreach collection="times" item="item"
+             separator="union all" >
+        select * from t_mc_job_info where date=#{item}
+    </foreach>
+    )
+</select>
+-->
+
+</mapper>
