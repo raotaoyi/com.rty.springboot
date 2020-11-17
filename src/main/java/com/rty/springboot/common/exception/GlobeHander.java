@@ -1,6 +1,6 @@
 package com.rty.springboot.common.exception;
 
-import com.huawei.shiro.jwt.domain.result.ResponseResult;
+import com.rty.springboot.bean.result.ResponseResult;
 import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.ResponseBody;
