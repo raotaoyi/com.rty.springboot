@@ -1,4 +1,4 @@
-package com.huawei.shiro.jwt.test;
+package com.rty.springboot.test;
 
 import org.junit.After;
 import org.junit.Before;

@@ -1,6 +1,6 @@
-package com.huawei.shiro.jwt.test.dao;
+package com.rty.springboot.test.dao;
 
-import com.huawei.shiro.jwt.test.ApplicationTest;
+import com.rty.springboot.test.ApplicationTest;
 import com.rty.springboot.web.mapper.UserMapper;
 import org.junit.Test;
 import org.springframework.beans.factory.annotation.Autowired;

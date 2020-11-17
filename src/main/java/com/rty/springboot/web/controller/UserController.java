@@ -2,6 +2,7 @@ package com.rty.springboot.web.controller;
 
 import com.rty.springboot.bean.UserInfo;
 import com.rty.springboot.bean.result.ResponseResult;
+import com.rty.springboot.web.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;

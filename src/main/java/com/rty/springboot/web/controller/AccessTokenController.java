@@ -1,11 +1,12 @@
 package com.rty.springboot.web.controller;
 
 
-import com.huawei.shiro.jwt.web.service.UserService;
+import com.rty.springboot.bean.result.ResultStatus;
 import com.rty.springboot.common.jwt.JwtHelper;
 import com.rty.springboot.bean.UserInfo;
 import com.rty.springboot.bean.audience.Audience;
 import com.rty.springboot.bean.result.ResponseResult;
+import com.rty.springboot.web.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -18,7 +19,6 @@ import java.util.Map;
 @RestController
 public class AccessTokenController {
 
-    private static final com.rty.springboot.bean.result.ResultStatus ResultStatus = ;
     @Autowired
     private UserService userService;
 
