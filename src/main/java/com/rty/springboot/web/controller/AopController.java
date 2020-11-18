@@ -18,7 +18,7 @@ import javax.servlet.http.HttpServletRequest;
 public class AopController extends AbstractContorller {
 
     @Pointcut("(execution(* com.rty.springboot.web.service..*.select*(..)) " +
-            "|| execution(* com.huawei.shiro.jwt.web.service..*.get*(..)))")
+            "|| execution(* com.rty.springboot.web.service..*.get*(..)))")
     public void readPointcut() {
 
     }

@@ -1,4 +1,4 @@
-package com.huawei.shiro.jwt.common.jwt;
+package com.rty.springboot.common.jwt;
 
 import com.auth0.jwt.JWT;
 import com.auth0.jwt.JWTVerifier;
