@@ -7,23 +7,29 @@ import com.rty.springboot.web.service.UserService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpServletRequest;
 
 @RestController
-@RequestMapping("/user")
 @CrossOrigin
+@RequestMapping("/user")
 public class UserController extends AbstractContorller {
     private static final Logger LOGGER = LoggerFactory.getLogger(UserController.class);
     @Autowired
     private UserService userService;
 
-    @RequestMapping(value = "/say")
-    @ResponseBody
-    public String helloWorld() {
-        return "Hello World";
+    @RequestMapping(value = "/say",method = RequestMethod.GET)
+    public ResultInfo<?> helloWorld() {
+        LOGGER.info("say hello");
+        try {
+            ResultInfo resultInfo=createSuccessResult();
+            resultInfo.setMessage("Hello World");
+            return resultInfo;
+        }catch (Exception e){
+           LOGGER.info("say fail",e);
+           return createFailResult("say fail");
+        }
     }
 
     @RequestMapping(value = "/getUsers", method = RequestMethod.GET)

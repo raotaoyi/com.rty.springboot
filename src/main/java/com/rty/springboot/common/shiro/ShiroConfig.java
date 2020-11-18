@@ -14,7 +14,7 @@ import javax.servlet.Filter;
 import java.util.HashMap;
 import java.util.Map;
 
-@Configuration
+/*@Configuration*/
 public class ShiroConfig {
 
     //权限管理，配置主要是Realm的管理认证
