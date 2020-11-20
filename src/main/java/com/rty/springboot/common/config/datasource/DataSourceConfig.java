@@ -16,37 +16,37 @@ import java.util.Map;
 public class DataSourceConfig {
 
     //配置主数据库
-    @Bean("masterDB")
+    @Bean("readDB")
     @Primary
-    @ConfigurationProperties(prefix = "spring.datasource.master")
+    @ConfigurationProperties(prefix = "spring.datasource.read")
     public DataSource getMasterDataSource() {
         return DataSourceBuilder.create().build();
 
     }
 
     //配置从数据库
-    @Bean("slaveDB")
-    @ConfigurationProperties(prefix = "spring.datasource.slave")
+    @Bean("writeDB")
+    @ConfigurationProperties(prefix = "spring.datasource.write")
     public DataSource getSlaveDataSource() {
         return DataSourceBuilder.create().build();
     }
 
     @Bean("routingDataSource")
-    public DataSource myRoutingDataSource(@Qualifier("masterDB") DataSource masterDataSource,
-                                          @Qualifier("slaveDB") DataSource slaveDataSource
+    public DataSource myRoutingDataSource(@Qualifier("readDB") DataSource readDataSource,
+                                          @Qualifier("writeDB") DataSource writeDataSource
     ) {
         Map<Object, Object> targetDataSources = new HashMap<>();
-        targetDataSources.put(DBTypeEnum.MASTER, masterDataSource);
-        targetDataSources.put(DBTypeEnum.SLAVE, slaveDataSource);
+        targetDataSources.put(DBTypeEnum.READ, readDataSource);
+        targetDataSources.put(DBTypeEnum.WRITE, writeDataSource);
         MyRoutingDataSource myRoutingDataSource = new MyRoutingDataSource();
-        myRoutingDataSource.setDefaultTargetDataSource(masterDataSource);
+        myRoutingDataSource.setDefaultTargetDataSource(readDataSource);
         myRoutingDataSource.setTargetDataSources(targetDataSources);
         return myRoutingDataSource;
     }
 
     @Bean("dataSourceTransactionManager")
-    public DataSourceTransactionManager dataSourceTransactionManager(@Qualifier("routingDataSource") DataSource myRoutingDataSource) {
-        return new DataSourceTransactionManager(myRoutingDataSource);
+    public DataSourceTransactionManager dataSourceTransactionManager(@Qualifier("routingDataSource") DataSource routingDataSource) {
+        return new DataSourceTransactionManager(routingDataSource);
     }
 
 }

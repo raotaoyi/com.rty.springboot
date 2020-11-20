@@ -35,12 +35,12 @@ public class AopController extends AbstractContorller {
 
     @Before("readPointcut()")
     public void read() {
-        DBContextHolder.slave();
+        DBContextHolder.read();
     }
 
     @Before("writePointcut()")
     public void write() {
-        DBContextHolder.master();
+        DBContextHolder.write();
     }
 
     @Pointcut("(execution(* com.rty.springboot.web.controller..*.*(..)))")

@@ -21,14 +21,14 @@ public class DBContextHolder {
         return contextHolder.get();
     }
 
-    public static void slave() {
-        set(DBTypeEnum.SLAVE);
+    public static void read() {
+        set(DBTypeEnum.READ);
         logger.info("its aready slave db");
 
     }
 
-    public static void master() {
-        set(DBTypeEnum.MASTER);
+    public static void write() {
+        set(DBTypeEnum.WRITE);
         logger.info("its aready master db");
 
     }

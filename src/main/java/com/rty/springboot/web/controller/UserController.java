@@ -3,6 +3,7 @@ package com.rty.springboot.web.controller;
 import com.rty.springboot.bean.ResultInfo;
 import com.rty.springboot.bean.UserInfo;
 import com.rty.springboot.bean.result.ResponseResult;
+import com.rty.springboot.util.StringUtil;
 import com.rty.springboot.web.service.UserService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -19,24 +20,34 @@ public class UserController extends AbstractContorller {
     @Autowired
     private UserService userService;
 
-    @RequestMapping(value = "/say",method = RequestMethod.GET)
+    @RequestMapping(value = "/say", method = RequestMethod.GET)
     public ResultInfo<?> helloWorld() {
         LOGGER.info("say hello");
         try {
-            ResultInfo resultInfo=createSuccessResult();
+            ResultInfo resultInfo = createSuccessResult();
             resultInfo.setMessage("Hello World");
             return resultInfo;
-        }catch (Exception e){
-           LOGGER.info("say fail",e);
-           return createFailResult("say fail");
+        } catch (Exception e) {
+            LOGGER.info("say fail", e);
+            return createFailResult("say fail");
         }
     }
 
     @RequestMapping(value = "/getUsers", method = RequestMethod.GET)
-    public ResponseResult getUsers() {
-        userService.getUser("jack");
-        return null;
-
+    public ResultInfo<?> getUsers(HttpServletRequest request) {
+        LOGGER.info("get user");
+        try {
+            ResultInfo resultInfo = createSuccessResult();
+            String userName = request.getParameter("userName");
+            if (StringUtil.isEmpty(userName)) {
+                createFailResult("param userName is empty");
+            }
+            resultInfo.setData(userService.getUser("jack"));
+            return resultInfo;
+        } catch (Exception e) {
+            LOGGER.info("get user fail", e);
+            return createFailResult("get user fail");
+        }
     }
 
     @RequestMapping(value = "/insertUser", method = RequestMethod.GET)
