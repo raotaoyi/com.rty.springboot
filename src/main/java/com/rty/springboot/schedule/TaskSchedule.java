@@ -27,4 +27,11 @@ public class TaskSchedule {
         LOGGER.info("start sync job time datail");
 
     }
+
+    @Scheduled(cron = "* 0/1 * ? * *")
+    public void insertProjectInfo() {
+        LOGGER.info("start project info datail");
+
+
+    }
 }

@@ -11,10 +11,10 @@
     <!-- Daily Rolling File Appender that compresses old files -->
     <appender name="file"
               class="ch.qos.logback.core.rolling.RollingFileAppender">
-        <file>./log/shirojwt.log</file>
+        <file>./log/my.log</file>
         <rollingPolicy name="file"
                        class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
-            <fileNamePattern>./log/shirojwt.log.%d{yyyy-MM-dd}.log.zip
+            <fileNamePattern>./log/my.log.%d{yyyy-MM-dd}.log.zip
             </fileNamePattern>
         </rollingPolicy>
         <encoder class="ch.qos.logback.classic.encoder.PatternLayoutEncoder">
@@ -22,10 +22,14 @@
         </encoder>
     </appender>
 
-    <!--log的作用范围,可以添加mybatis的打印信息-->
+    <!--log的作用范围,可以添加sql的打印信息-->
     <!-- 	<logger name="com.h3c.smsmw" level="INFO">
             <appender-ref ref="file" />
         </logger> -->
+    <logger name="com.rty.springboot.web.mapper" level="DEBUG"/>
+    <logger name="java.sql.Connection" level="DEBUG" />
+    <logger name="java.sql.Statement" level="DEBUG" />
+    <logger name="java.sql.PreparedStatement" level="DEBUG" />
 
     <root level="INFO">
         <appender-ref ref="file" />

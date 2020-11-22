@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//ibatis.apache.org//DTD Mapper 3.0//EN"
+        "http://ibatis.apache.org/dtd/ibatis-3-mapper.dtd">
+<mapper namespace="com.rty.springboot.web.mapper.ProjectInfoMapper">
+    <insert id="insertProjectInfo">
+        replace into t_mc_proj_info(
+        REGISTER_KEY,
+        PROJECT_NAME,
+        CREATE_TIME,
+        AREA
+        )
+        values(
+        #{projectInfo.registerKey},
+        #{projectInfo.projectName},
+        now(),
+        #{projectInfo.area}
+        )
+    </insert>
+
+</mapper>

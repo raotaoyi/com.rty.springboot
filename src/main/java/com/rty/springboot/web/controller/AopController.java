@@ -66,13 +66,12 @@ public class AopController extends AbstractContorller {
     }
 
     /**
-     * 获取request中相应的验证信息，进行验证token验证等
+     * 获取request中相应的验证信息，进行验证接口的token验证等
      */
     private boolean isPermission() {
         RequestAttributes ra = RequestContextHolder.getRequestAttributes();
         ServletRequestAttributes sra = (ServletRequestAttributes) ra;
         HttpServletRequest request = sra.getRequest();
-        System.out.println("url:" + request.getRequestURL());
         return true;
     }
 }

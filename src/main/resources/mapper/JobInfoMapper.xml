@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//ibatis.apache.org//DTD Mapper 3.0//EN"
+        "http://ibatis.apache.org/dtd/ibatis-3-mapper.dtd">
+<mapper namespace="com.rty.springboot.web.mapper.JobInfoMapper">
+    <insert id="insertJobInfo">
+        replace into t_mc_job_info(
+        ID,
+        REGISTER_KEY,
+        JOB_STATUS,
+        TOOLS,
+        JOB_DATE,
+        AREA
+        )
+        VALUES
+        <foreach collection="jobInfoBeans" item="item"
+                 separator="," open="(" close=")">
+            #{item.id},
+            #{item.registerKey},
+            #{item.jobStatus},
+            #{item.tools},
+            date_format(now(),'%Y-%m_%d'),
+            #{item.area}
+        </foreach>
+    </insert>
+
+    <insert id="insertJobTask">
+        replace into t_mc_job_task(
+        ID,
+        JOB_ID,
+        ANALYZER_STARTTIME,
+        ANALYZER_ENDTIME,
+        LANGUAGE,
+        TOOL,
+        AREA
+        )
+        values
+        <foreach collection="jobTaskInfos" item="item"
+                 separator="," open="(" close=")">
+            #{item.id},
+            #{item.jobId},
+            now(),
+            now(),
+            #{item.language},
+            #{item.tool},
+            #{item.area}
+        </foreach>
+
+    </insert>
+
+    <insert id="insertJobTimeDetail">
+        replace into t_mc_job_time_detail(
+        ID,
+        START_TIME,
+        CREATE_TIME,
+        END_TIME,
+        AREA
+        )
+        values
+        <foreach collection="jobInfoBeans" item="item"
+                 separator="," open="(" close=")">
+            #{item.id},
+            now(),
+            now(),
+            now(),
+            now()
+            #{item.area}
+        </foreach>
+
+    </insert>
+
+</mapper>
