@@ -1,5 +1,7 @@
 package com.rty.springboot.schedule;
 
+import com.alibaba.fastjson.JSONObject;
+import com.rty.springboot.util.HttpUtil;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -28,9 +30,12 @@ public class TaskSchedule {
 
     }
 
-    @Scheduled(cron = "* 0/1 * ? * *")
+    @Scheduled(cron = "0/30 * * ? * *")
     public void insertProjectInfo() {
         LOGGER.info("start project info datail");
+        String url="";
+        JSONObject object=JSONObject.parseObject("");
+        HttpUtil.post(url,object,"UTF-8");
 
 
     }
