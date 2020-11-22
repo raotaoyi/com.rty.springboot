@@ -9,6 +9,7 @@ public class DBContextHolder {
 
     public final static Logger logger = LoggerFactory.getLogger(DBContextHolder.class);
 
+    /*线程安全的工具类，线程隔离*/
     private static final ThreadLocal<DBTypeEnum> contextHolder = new ThreadLocal<>();
 
     private static final AtomicInteger counter = new AtomicInteger(-1);

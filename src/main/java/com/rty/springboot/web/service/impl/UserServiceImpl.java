@@ -7,7 +7,6 @@ import com.rty.springboot.web.service.UserService;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.cache.annotation.CachePut;
 import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Service;
 
@@ -15,7 +14,7 @@ import org.springframework.stereotype.Service;
 public class UserServiceImpl implements UserService {
     private static final Log LOGGER = LogFactory.getLog(UserServiceImpl.class);
     @Autowired
-    private UserMapper userDao;
+    private UserMapper userMapper;
 
 
     /**
@@ -25,7 +24,7 @@ public class UserServiceImpl implements UserService {
     @Cacheable(value = "rty_cache", key = "#root.methodName")
     public UserInfo getUser(String username) {
         LOGGER.info("from db get user");
-        return userDao.getUser(username);
+        return userMapper.getUser(username);
     }
 
     @Override

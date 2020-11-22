@@ -1,11 +1,12 @@
 package com.rty.springboot.common.config.datasource;
 
+import com.zaxxer.hikari.HikariDataSource;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
-import org.springframework.boot.autoconfigure.jdbc.DataSourceBuilder;
-import org.springframework.boot.context.properties.ConfigurationProperties;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Primary;
+import org.springframework.core.env.Environment;
 import org.springframework.jdbc.datasource.DataSourceTransactionManager;
 
 import javax.sql.DataSource;
@@ -15,20 +16,30 @@ import java.util.Map;
 @Configuration
 public class DataSourceConfig {
 
+    @Autowired
+    private Environment env;
+
     //配置主数据库
     @Bean("readDB")
     @Primary
-    @ConfigurationProperties(prefix = "spring.datasource.read")
-    public DataSource getMasterDataSource() {
-        return DataSourceBuilder.create().build();
-
+    public DataSource getReadDataSource() {
+        HikariDataSource readDB = new HikariDataSource();
+        readDB.setDriverClassName(env.getProperty("spring.datasource.driver-class-name"));
+        readDB.setJdbcUrl(env.getProperty("spring.datasource.read.url"));
+        readDB.setPassword(env.getProperty("spring.datasource.read.password"));
+        readDB.setUsername(env.getProperty("spring.datasource.read.username"));
+        return readDB;
     }
 
     //配置从数据库
     @Bean("writeDB")
-    @ConfigurationProperties(prefix = "spring.datasource.write")
-    public DataSource getSlaveDataSource() {
-        return DataSourceBuilder.create().build();
+    public DataSource getWriteDataSource() {
+        HikariDataSource writeDB = new HikariDataSource();
+        writeDB.setDriverClassName(env.getProperty("spring.datasource.driver-class-name"));
+        writeDB.setJdbcUrl(env.getProperty("spring.datasource.write.url"));
+        writeDB.setUsername(env.getProperty("spring.datasource.write.username"));
+        writeDB.setPassword(env.getProperty("spring.datasource.write.password"));
+        return writeDB;
     }
 
     @Bean("routingDataSource")

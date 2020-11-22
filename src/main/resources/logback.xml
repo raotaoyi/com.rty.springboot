@@ -22,6 +22,7 @@
         </encoder>
     </appender>
 
+    <!--log的作用范围,可以添加mybatis的打印信息-->
     <!-- 	<logger name="com.h3c.smsmw" level="INFO">
             <appender-ref ref="file" />
         </logger> -->

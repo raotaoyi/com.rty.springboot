@@ -37,9 +37,34 @@
             <artifactId>spring-boot-starter-web</artifactId>
         </dependency>
 
+        <!--
+        切换默认数据源
+        方式一 排除其他的数据源依赖，仅保留需要的数据源依赖；
+        方式二 通过在核心配置中通过spring.datasource.type属性指定数据源的类型;
+        spring.datasource.type=com.zaxxer.hikari.HikariDataSource
+        Springboot默认支持的4种数据源:tomcat-jdbc,HikariCP,commons-dbcp,commons-dbcp2
+        当我们引入spring-boot-start-jdbc依赖时，其实里面就包含了 Tomcat-JDBC 的依赖，如果想要切换为其他的数据源类型，
+        需要先将Tomcat-JDBC 依赖排除，再添加上需要的数据源的依赖，以使用HikariCP数据源为例;
+        如果不想使用Springboot默认支持的4种数据源，还可以选择使用其他第三方的数据源，例如：Druid、c3p0等。
+        以使用Druid数据源为例。
+        核心配置文件中的添加数据源相关配置与使用默认数据源时的配置相同
+        -->
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-jdbc</artifactId>
+            <exclusions>
+                <!-- 排除Tomcat-JDBC依赖 -->
+                <exclusion>
+                    <groupId>org.apache.tomcat</groupId>
+                    <artifactId>tomcat-jdbc</artifactId>
+                </exclusion>
+            </exclusions>
+        </dependency>
+
+        <!-- 添加HikariCP依赖 -->
+        <dependency>
+            <groupId>com.zaxxer</groupId>
+            <artifactId>HikariCP</artifactId>
         </dependency>
 
         <dependency>
