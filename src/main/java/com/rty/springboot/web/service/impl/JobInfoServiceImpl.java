@@ -39,7 +39,7 @@ public class JobInfoServiceImpl implements IJobInfoService {
     @Cacheable(value = "rty_cache", key="#root.methodName+'_'+#root.target.getArea(#param)")
     //@Cacheable(value = "rty_cache", key="#root.methodName+'_'+#param.get('area')")
     //@Cacheable(value = "rty_cache", key="#root.methodName+'_'+#param.get('area')",
-            condition = "#param.get('area')=='all'")
+    //        condition = "#param.get('area')=='all'")
     public int getJobCount(Map<String, String> param) {
         return jobInfoMapper.queryJobCount(param);
     }
