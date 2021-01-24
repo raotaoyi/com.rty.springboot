@@ -36,4 +36,12 @@ public class TaskSchedule {
         JSONObject object=JSONObject.parseObject("");
         HttpUtil.post(url,object,"UTF-8");
     }
+
+    /**
+     * 凌晨30清除缓存
+     */
+    @Scheduled(cron = "* 30 0 ? * *")
+    public void clearCache(){
+
+    }
 }
