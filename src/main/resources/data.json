@@ -1,0 +1,30 @@
+{
+  "registerKey": "",
+  "projectName": "",
+  "createTime": "",
+  "area": "",
+  "jobs": [
+    {
+      "jobId": "",
+      "registerKey": "",
+      "jobStatus": "",
+      "tools": "",
+      "jobDate": "",
+      "area": "",
+      "startTime": "",
+      "createTime": "",
+      "endTime": "",
+      "tasks": [
+        {
+          "id":"",
+          "jobId": "",
+          "analyzerStartTime": "",
+          "analyzerEndTime": "",
+          "language": "",
+          "tool": "",
+          "area": ""
+        }
+      ]
+    }
+  ]
+}

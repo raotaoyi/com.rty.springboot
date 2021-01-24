@@ -65,7 +65,17 @@
             now()
             #{item.area}
         </foreach>
-
     </insert>
+
+    <select id="queryJobCount" returnType="int">
+        select
+        count(1)
+        from t_mc_job_info
+        WHERE
+        JOB_DATE BETWEEN #{param.startTime} and #{param.endTime}
+        <if id="param.area!='all'">
+            and area=#{para.area}
+        </if>
+    </select>
 
 </mapper>

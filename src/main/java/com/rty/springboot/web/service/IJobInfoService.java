@@ -5,6 +5,7 @@ import com.rty.springboot.bean.JobTaskInfo;
 import org.apache.ibatis.annotations.Param;
 
 import java.util.List;
+import java.util.Map;
 
 public interface IJobInfoService {
     /**
@@ -21,4 +22,10 @@ public interface IJobInfoService {
      * 插入task信息
      */
     void addJobTask(List<JobTaskInfo> jobTaskInfos);
+
+    /**
+     * 统计指定条件下的job数量
+     */
+    int getJobCount(Map<String, String> param);
+
 }

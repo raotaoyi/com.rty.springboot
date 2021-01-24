@@ -27,16 +27,13 @@ public class TaskSchedule {
     @Async
     public void insertJobTimeDetailInfo() {
         LOGGER.info("start sync job time datail");
-
     }
 
     @Scheduled(cron = "0/30 * * ? * *")
     public void insertProjectInfo() {
-        LOGGER.info("start project info datail");
+        LOGGER.info("start project info detail");
         String url="";
         JSONObject object=JSONObject.parseObject("");
         HttpUtil.post(url,object,"UTF-8");
-
-
     }
 }

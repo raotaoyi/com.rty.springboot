@@ -8,6 +8,10 @@ public class AbstractContorller {
         return new ResultInfo<>();
     }
 
+    public ResultInfo<?> createSuccessResult(String message) {
+        return new ResultInfo<>(message);
+    }
+
     public ResultInfo<?> createFailResult(String message) {
         return new ResultInfo<>(message);
     }
