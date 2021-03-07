@@ -3,3 +3,5 @@
 
 ping 【ip/域名】 查看该机子是否连的上
 telnet 【ip/域名】 【端口】测试该机子的端口是否通的
+
+native2ascii字节码转译
