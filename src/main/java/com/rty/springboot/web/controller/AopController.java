@@ -13,6 +13,10 @@ import org.springframework.web.context.request.ServletRequestAttributes;
 
 import javax.servlet.http.HttpServletRequest;
 
+
+/**
+ * 类说明，aop的切换以及接口权限验证的
+ */
 @Aspect
 @Component
 public class AopController extends AbstractContorller {

@@ -3,6 +3,7 @@ package com.rty.springboot.web.controller;
 import com.rty.springboot.bean.ResultInfo;
 import com.rty.springboot.util.Constant;
 import com.rty.springboot.util.DateUtil;
+import com.rty.springboot.util.ExcelFileUtil;
 import com.rty.springboot.util.StringUtil;
 import com.rty.springboot.web.service.IJobInfoService;
 import org.slf4j.Logger;
@@ -14,6 +15,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -44,6 +46,21 @@ public class JobController extends AbstractContorller {
         }
     }
 
+    /**
+     * 导出查询的数据
+     */
+    @RequestMapping(value = "/export", method = RequestMethod.GET)
+    public void exportJobInfo(HttpServletRequest request, HttpServletResponse response) {
+        try {
+            Map<String, String> param = new HashMap<>();
+            Map<String, Map<String, Object>> jobInfoData = new HashMap<>();
+            initParam(param, request);
+            ExcelFileUtil.export(response, "", jobInfoData);
+        } catch (Exception e) {
+            LOGGER.error("export job info fail", e);
+        }
+    }
+
     public void initParam(Map<String, String> param, HttpServletRequest request) {
         String startTime = request.getParameter("startTime");
         param.put("startTime", StringUtil.isEmpty(startTime) ?
@@ -52,6 +69,5 @@ public class JobController extends AbstractContorller {
         param.put("endTime", StringUtil.isEmpty(endTime) ?
                 DateUtil.getBeforeDay(DateUtil.getCurrentDay(), Constant.NEGATIVE_NUM_ONE) : endTime);
     }
-
 
 }
