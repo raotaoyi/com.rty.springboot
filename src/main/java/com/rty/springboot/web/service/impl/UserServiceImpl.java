@@ -10,7 +10,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Service;
 
-@Service("userService")
+@Service
 public class UserServiceImpl implements UserService {
     private static final Log LOGGER = LogFactory.getLog(UserServiceImpl.class);
     @Autowired
