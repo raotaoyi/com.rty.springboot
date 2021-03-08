@@ -17,6 +17,7 @@ import org.springframework.web.bind.annotation.RestController;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 @RestController
@@ -53,9 +54,9 @@ public class JobController extends AbstractContorller {
     public void exportJobInfo(HttpServletRequest request, HttpServletResponse response) {
         try {
             Map<String, String> param = new HashMap<>();
-            Map<String, Map<String, Object>> jobInfoData = new HashMap<>();
+            Map<String, Map<String, List<Object>>>jobInfoData = new HashMap<>();
             initParam(param, request);
-            ExcelFileUtil.export(response, "", jobInfoData);
+            ExcelFileUtil.exportExcel(response, "", jobInfoData);
         } catch (Exception e) {
             LOGGER.error("export job info fail", e);
         }

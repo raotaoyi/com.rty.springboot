@@ -1,15 +1,37 @@
 package com.rty.springboot.util;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 import javax.servlet.http.HttpServletResponse;
+import java.io.OutputStream;
+import java.util.List;
 import java.util.Map;
 
 /**
  * 运用反射字段，将对象赋值，提高代碼的复用性
  */
 public class ExcelFileUtil {
+    private static final Logger LOGGER = LoggerFactory.getLogger(ExcelFileUtil.class);
 
-    public static void export(HttpServletResponse response, String fileName,
-                              Map<String, Map<String, Object>> exportData) {
+    public static void exportExcel(HttpServletResponse response, String fileName,
+                                   Map<String, Map<String, List<Object>>> exportData) {
+        //初始化respone
+        try (OutputStream outputStream = response.getOutputStream();) {
+             export();
+        } catch (Exception e) {
+
+        }
+
+    }
+
+    public static void export() {
+        //设置style
+        setStyle();
+
+    }
+
+    public static void setStyle(){
 
     }
 
