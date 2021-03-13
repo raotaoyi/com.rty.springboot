@@ -28,4 +28,9 @@ public interface IJobInfoService {
      */
     int getJobCount(Map<String, String> param);
 
+    /**
+     * 获取job的信息
+     */
+    List<JobInfoBean> getJobInfos(Map<String, String> param);
+
 }

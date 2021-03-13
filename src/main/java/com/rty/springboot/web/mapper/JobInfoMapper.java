@@ -28,4 +28,9 @@ public interface JobInfoMapper {
      * 统计指定条件下的job数量
      */
     int queryJobCount(@Param("param") Map<String, String> param);
+
+    /**
+     * 获取job的信息
+     */
+    List<JobInfoBean> queryJobInfos(Map<String, String> param);
 }

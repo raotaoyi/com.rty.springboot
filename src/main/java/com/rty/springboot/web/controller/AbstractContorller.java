@@ -2,8 +2,6 @@ package com.rty.springboot.web.controller;
 
 import com.rty.springboot.bean.ResultInfo;
 
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
 
 public class AbstractContorller {
 
@@ -19,7 +17,4 @@ public class AbstractContorller {
         return new ResultInfo<>(message);
     }
 
-    private static void initExportHeader(HttpServletRequest request, HttpServletResponse response) {
-
-    }
 }

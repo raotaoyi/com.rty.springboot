@@ -44,6 +44,11 @@ public class JobInfoServiceImpl implements IJobInfoService {
         return jobInfoMapper.queryJobCount(param);
     }
 
+    @Override
+    public List<JobInfoBean> getJobInfos(Map<String, String> param) {
+        return null;
+    }
+
     private String getArea(Map<String,String> param){
         return param.get("area");
 

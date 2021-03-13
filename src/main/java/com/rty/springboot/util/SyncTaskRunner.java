@@ -8,6 +8,9 @@ import org.springframework.jdbc.CannotGetJdbcConnectionException;
 import java.util.*;
 import java.util.concurrent.*;
 
+/**
+ * 多线程，以及异常重试
+ */
 public class SyncTaskRunner {
     private final static Logger LOGGER = LoggerFactory.getLogger(SyncTaskRunner.class);
 

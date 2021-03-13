@@ -67,17 +67,9 @@
         </foreach>
     </insert>
 
-<!--    <select id="queryJobCount" returnType="java.lang.Integer">
-        select
-        count(1)
-        from t_mc_job_info
-        WHERE
-        JOB_DATE BETWEEN #{param.startTime} and #{param.endTime}
-        <if id="param.area!='all'">
-            and area=#{para.area}
-        </if>
-    </select>-->
 
-   <!-- <select id="" returnType=""></select>-->
+    <select id="queryJobInfos" returnType="com.rty.springboot.bean.JobInfoBean">
+
+    </select>
 
 </mapper>

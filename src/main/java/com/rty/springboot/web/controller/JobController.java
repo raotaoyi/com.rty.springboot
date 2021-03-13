@@ -1,5 +1,6 @@
 package com.rty.springboot.web.controller;
 
+import com.rty.springboot.bean.JobInfoBean;
 import com.rty.springboot.bean.ResultInfo;
 import com.rty.springboot.util.Constant;
 import com.rty.springboot.util.DateUtil;
@@ -9,6 +10,7 @@ import com.rty.springboot.web.service.IJobInfoService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.core.env.Environment;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -16,6 +18,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -27,6 +30,9 @@ public class JobController extends AbstractContorller {
 
     @Autowired
     private IJobInfoService jobInfoService;
+
+    @Autowired
+    private Environment env;
 
     @RequestMapping(value = "/getCount/{area}", method = RequestMethod.GET)
     public ResultInfo<?> getJobInfo(@PathVariable String area, HttpServletRequest request) {
@@ -54,9 +60,13 @@ public class JobController extends AbstractContorller {
     public void exportJobInfo(HttpServletRequest request, HttpServletResponse response) {
         try {
             Map<String, String> param = new HashMap<>();
-            Map<String, Map<String, List<Object>>>jobInfoData = new HashMap<>();
+            Map<String, Map<String, List<Object>>> jobInfoData = new HashMap<>();
             initParam(param, request);
-            ExcelFileUtil.exportExcel(response, "", jobInfoData);
+            List<JobInfoBean> jobs = jobInfoService.getJobInfos(param);
+            Map<String, List<Object>> dataMap = new HashMap<>();
+            dataMap.put(env.getProperty("job.info.detail"), Collections.singletonList(jobs));
+            jobInfoData.put("jobDetail", dataMap);
+            ExcelFileUtil.exportExcel(response, "jobDetail", jobInfoData);
         } catch (Exception e) {
             LOGGER.error("export job info fail", e);
         }
