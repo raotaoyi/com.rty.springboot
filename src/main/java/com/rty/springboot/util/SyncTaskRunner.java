@@ -116,7 +116,7 @@ public class SyncTaskRunner {
             });
 
             try {
-                if (!count.await(10, TimeUnit.SECONDS)) {
+                while (!count.await(10, TimeUnit.SECONDS)) {
                     LOGGER.info("this group process " + (total - count.getCount()));
                 }
             } catch (InterruptedException e) {
@@ -150,7 +150,7 @@ public class SyncTaskRunner {
         private Group group;
         private boolean isSuccess;
         private int tryCount = 0;
-        private static int MAX_TRY_COUNT = 100;
+        private static int MAX_TRY_COUNT = 10;
 
         public Proxy(String taskName, Callable runnable) {
             this(taskName, runnable, null, 0);
@@ -184,6 +184,9 @@ public class SyncTaskRunner {
                 }
                 long endTime = System.currentTimeMillis();
                 if (!StringUtil.isEmpty(taskName)) {
+                    Map<String,Long> orderTime=new HashMap<>();
+                    orderTime.put(taskName,endTime-startTime);
+                    group.orderPrintResults.add(orderTime);
                     LOGGER.info("task " + taskName + " is finish,the cost time is " + (endTime - startTime));
                 }
             }
@@ -236,6 +239,5 @@ public class SyncTaskRunner {
 
     private static interface ResultProcess<V> {
         public void doResult(V result);
-
     }
 }

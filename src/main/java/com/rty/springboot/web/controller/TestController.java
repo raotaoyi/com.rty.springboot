@@ -23,13 +23,15 @@ public class TestController extends AbstractContorller {
     @RequestMapping(value = "/sync", method = RequestMethod.GET)
     public ResultInfo<?> testSync() {
         try {
+            LOGGER.info("start sync add job");
             ResultInfo resultInfo = createSuccessResult("test sync successful");
             int groupId = SyncTaskRunner.createGroup();
             SyncTaskRunner.add("addJobInfo", () -> jobInfoService.addJobInfo(new ArrayList<>()), groupId);
-            SyncTaskRunner.add("addJobInfo2", () -> jobInfoService.addJobInfo(new ArrayList<>()), groupId);
+            SyncTaskRunner.add("addJobInfo2", () -> {throw new RuntimeException("add job fail");}, groupId);
             SyncTaskRunner.add("addJobInfo3", () -> jobInfoService.addJobInfo(new ArrayList<>()), groupId);
             SyncTaskRunner.add("addJobInfo4", () -> jobInfoService.addJobInfo(new ArrayList<>()), groupId);
             SyncTaskRunner.start(groupId);
+            LOGGER.info("end sync add job");
             return resultInfo;
         } catch (Exception e) {
             LOGGER.info("test sync fail", e);
