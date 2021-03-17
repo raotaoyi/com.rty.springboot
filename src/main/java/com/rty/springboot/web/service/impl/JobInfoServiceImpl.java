@@ -2,7 +2,7 @@ package com.rty.springboot.web.service.impl;
 
 import com.rty.springboot.bean.JobInfoBean;
 import com.rty.springboot.bean.JobTaskInfo;
-import com.rty.springboot.web.mapper.JobInfoMapper;
+import com.rty.springboot.web.mapper.mc.JobInfoMapper;
 import com.rty.springboot.web.service.IJobInfoService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;

@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//ibatis.apache.org//DTD Mapper 3.0//EN"
         "http://ibatis.apache.org/dtd/ibatis-3-mapper.dtd">
-<mapper namespace="com.rty.springboot.web.mapper.JobInfoMapper">
+<mapper namespace="com.rty.springboot.web.mapper.mc.JobInfoMapper">
     <insert id="insertJobInfo">
         replace into t_mc_job_info(
         ID,

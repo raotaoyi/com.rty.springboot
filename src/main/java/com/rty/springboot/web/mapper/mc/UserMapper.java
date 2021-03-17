@@ -1,4 +1,4 @@
-package com.rty.springboot.web.mapper;
+package com.rty.springboot.web.mapper.mc;
 
 import com.rty.springboot.bean.UserInfo;
 import org.apache.ibatis.annotations.Mapper;

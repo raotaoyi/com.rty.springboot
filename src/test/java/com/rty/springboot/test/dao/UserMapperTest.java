@@ -1,7 +1,7 @@
 package com.rty.springboot.test.dao;
 
 import com.rty.springboot.test.ApplicationTest;
-import com.rty.springboot.web.mapper.UserMapper;
+import com.rty.springboot.web.mapper.mc.UserMapper;
 import com.syscxp.sdk.common.ZSClient;
 import com.syscxp.sdk.common.ZSConfig;
 import com.syscxp.sdk.tunnel.ExtMonitorIcmpDataAction;

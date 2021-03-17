@@ -1,7 +1,7 @@
 package com.rty.springboot.web.service.impl;
 
 import com.rty.springboot.bean.ProjectInfoBean;
-import com.rty.springboot.web.mapper.ProjectInfoMapper;
+import com.rty.springboot.web.mapper.mc.ProjectInfoMapper;
 import com.rty.springboot.web.service.IProjectInfoService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;

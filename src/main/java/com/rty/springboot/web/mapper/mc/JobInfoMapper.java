@@ -1,4 +1,4 @@
-package com.rty.springboot.web.mapper;
+package com.rty.springboot.web.mapper.mc;
 
 import com.rty.springboot.bean.JobInfoBean;
 import com.rty.springboot.bean.JobTaskInfo;

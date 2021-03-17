@@ -39,6 +39,7 @@ public class TaskSchedule {
     }
 
     @Scheduled(cron = "0/30 * * ? * *")
+    @Async
     public void insertProjectInfo() {
         LOGGER.info("start project info detail");
         String url = "";

@@ -2,7 +2,7 @@ package com.rty.springboot.web.service.impl;
 
 
 import com.rty.springboot.bean.UserInfo;
-import com.rty.springboot.web.mapper.UserMapper;
+import com.rty.springboot.web.mapper.mc.UserMapper;
 import com.rty.springboot.web.service.UserService;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
