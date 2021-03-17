@@ -9,6 +9,7 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.io.OutputStream;
 import java.lang.reflect.Field;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
@@ -39,37 +40,37 @@ public class ExcelFileUtil {
             for (Map.Entry<String, List<Object>> values : dataValue.entrySet()) {
                 String header = values.getKey();
                 String[] excelHeader = header.split("[|]");
-                String[] titleArray = new String[0];
-                String[] filedArray = new String[0];
+                List<String> titleArray = new ArrayList<>();
+                List<String> filedArray = new ArrayList<>();
                 for (int i = 0; i < excelHeader.length; i++) {
                     String[] tempArray = excelHeader[i].split("#");
-                    titleArray[i] = tempArray[0];
-                    filedArray[i] = tempArray[1];
+                    titleArray.add(tempArray[1]);
+                    filedArray.add(tempArray[0]);
                 }
                 //sheet页添加标题行
                 //行数从1开始
                 XSSFRow row = sheet.createRow(1);
                 sheet.autoSizeColumn(0);
                 XSSFCell cell = null;
-                for (int i = 0; i < titleArray.length; i++) {
+                for (int i = 0; i < titleArray.size(); i++) {
                     //设置列数值
                     cell = row.createCell(i);
-                    cell.setCellValue(titleArray[i]);
+                    cell.setCellValue(titleArray.get(i));
                 }
                 //设置cell的字体样式
                 Field[] fields;
                 int i = 2;
-
-                for (Object obj : values.getValue()) {
+                List<Object> objs = values.getValue();
+                for (Object obj : objs) {
                     fields = obj.getClass().getDeclaredFields();
                     XSSFRow rowBody = sheet.createRow(i);
                     rowBody.setHeightInPoints(20);
                     int j = 0;
                     for (String field : filedArray) {
-                        for(Field fieldObj:fields){
+                        for (Field fieldObj : fields) {
                             fieldObj.setAccessible(true);
                             Object va = fieldObj.get(obj);
-                            if(fieldObj.getName().equals(field)){
+                            if (fieldObj.getName().equals(field)) {
                                 if (null == va) {
                                     va = "";
                                 }

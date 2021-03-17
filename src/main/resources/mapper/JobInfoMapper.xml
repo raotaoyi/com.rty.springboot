@@ -67,4 +67,16 @@
         </foreach>
     </insert>
 
+    <select id="queryJobInfos" resultType="com.rty.springboot.bean.JobInfoBean">
+        select
+        ID id,
+        REGISTER_KEY registerKey,
+        JOB_STATUS jobStatus,
+        TOOLS tools,
+        JOB_DATE jobDate,
+        AREA area
+        from
+        t_mc_job_info
+    </select>
+
 </mapper>

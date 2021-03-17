@@ -4,6 +4,8 @@ import com.rty.springboot.bean.JobInfoBean;
 import com.rty.springboot.bean.JobTaskInfo;
 import com.rty.springboot.web.mapper.JobInfoMapper;
 import com.rty.springboot.web.service.IJobInfoService;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.cache.annotation.CacheEvict;
 import org.springframework.cache.annotation.Cacheable;
@@ -14,13 +16,21 @@ import java.util.Map;
 
 @Service
 public class JobInfoServiceImpl implements IJobInfoService {
+    private final static Logger LOGGER = LoggerFactory.getLogger(JobInfoServiceImpl.class);
 
     @Autowired
     private JobInfoMapper jobInfoMapper;
 
     @Override
     public void addJobInfo(List<JobInfoBean> jobInfoBeans) {
-        jobInfoMapper.insertJobInfo(jobInfoBeans);
+        try {
+            LOGGER.info("start add job info");
+            Thread.sleep(3000);
+            LOGGER.info("end add job info");
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+        /*        jobInfoMapper.insertJobInfo(jobInfoBeans);*/
 
     }
 
@@ -36,7 +46,7 @@ public class JobInfoServiceImpl implements IJobInfoService {
     }
 
     @Override
-    @Cacheable(value = "rty_cache", key="#root.methodName+'_'+#root.target.getArea(#param)")
+    @Cacheable(value = "rty_cache", key = "#root.methodName+'_'+#root.target.getArea(#param)")
     //@Cacheable(value = "rty_cache", key="#root.methodName+'_'+#param.get('area')")
     //@Cacheable(value = "rty_cache", key="#root.methodName+'_'+#param.get('area')",
     //        condition = "#param.get('area')=='all'")
@@ -46,10 +56,10 @@ public class JobInfoServiceImpl implements IJobInfoService {
 
     @Override
     public List<JobInfoBean> getJobInfos(Map<String, String> param) {
-        return null;
+        return jobInfoMapper.queryJobInfos(param);
     }
 
-    private String getArea(Map<String,String> param){
+    private String getArea(Map<String, String> param) {
         return param.get("area");
 
     }

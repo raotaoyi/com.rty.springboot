@@ -18,10 +18,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import java.util.Collections;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 @RestController
 @RequestMapping("/gain/job")
@@ -61,12 +58,14 @@ public class JobController extends AbstractContorller {
         try {
             Map<String, String> param = new HashMap<>();
             Map<String, Map<String, List<Object>>> jobInfoData = new HashMap<>();
+            List<Object> jobList=new ArrayList<>();
             initParam(param, request);
             List<JobInfoBean> jobs = jobInfoService.getJobInfos(param);
+            jobList.addAll(jobs);
             Map<String, List<Object>> dataMap = new HashMap<>();
-            dataMap.put(env.getProperty("job.info.detail"), Collections.singletonList(jobs));
+            dataMap.put(env.getProperty("job.info.detail"), jobList);
             jobInfoData.put("jobDetail", dataMap);
-            ExcelFileUtil.exportExcel(response, "jobDetail", jobInfoData);
+            ExcelFileUtil.exportExcel(response, "jobDetail.xlsx", jobInfoData);
         } catch (Exception e) {
             LOGGER.error("export job info fail", e);
         }

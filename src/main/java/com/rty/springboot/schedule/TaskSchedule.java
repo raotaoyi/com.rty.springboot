@@ -2,13 +2,17 @@ package com.rty.springboot.schedule;
 
 import com.alibaba.fastjson.JSONObject;
 import com.rty.springboot.util.HttpUtil;
+import com.rty.springboot.util.SyncTaskRunner;
 import com.rty.springboot.web.service.ICacheService;
+import com.rty.springboot.web.service.IJobInfoService;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.scheduling.annotation.Async;
 import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Component;
+
+import java.util.ArrayList;
 
 /**
  * Async 类说明:定时器如果不使用异步，如果有进程进行阻塞，那么后面的定时到时间就是排队，导致，
@@ -19,6 +23,8 @@ public class TaskSchedule {
     private static final Log LOGGER = LogFactory.getLog(TaskSchedule.class);
 
     private ICacheService cacheService;
+    @Autowired
+    private IJobInfoService jobInfoService;
 
     @Scheduled(cron = "* 32 23 ? * *")
     @Async
@@ -37,7 +43,7 @@ public class TaskSchedule {
         LOGGER.info("start project info detail");
         String url = "";
         JSONObject object = JSONObject.parseObject("");
-        HttpUtil.post(url, object, "UTF-8");
+        /*        HttpUtil.post(url, object, "UTF-8");*/
     }
 
     /**
