@@ -31,7 +31,7 @@ public class JobController extends AbstractContorller {
     @Autowired
     private Environment env;
 
-    @RequestMapping(value = "/getCount/{area}", method = RequestMethod.GET)
+    @RequestMapping(value = "/getJobs/{area}", method = RequestMethod.GET)
     public ResultInfo<?> getJobInfo(@PathVariable String area, HttpServletRequest request) {
         LOGGER.info("get count");
         try {
@@ -42,7 +42,7 @@ public class JobController extends AbstractContorller {
             Map<String, String> param = new HashMap<>();
             param.put("area", area);
             initParam(param, request);
-            resultInfo.setData(jobInfoService.getJobCount(param));
+            resultInfo.setData(jobInfoService.getJobInfos(param));
             return resultInfo;
         } catch (Exception e) {
             LOGGER.info("get job count fail", e);
