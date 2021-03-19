@@ -2,12 +2,14 @@ package com.rty.springboot.web.mapper.mc;
 
 import com.rty.springboot.bean.JobInfoBean;
 import com.rty.springboot.bean.JobTaskInfo;
+import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
 import org.springframework.web.bind.annotation.PathVariable;
 
 import java.util.List;
 import java.util.Map;
 
+@Mapper
 public interface JobInfoMapper {
     /**
      * 插入job信息

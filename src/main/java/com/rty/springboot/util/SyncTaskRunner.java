@@ -57,6 +57,14 @@ public class SyncTaskRunner {
         }
     }
 
+    public synchronized static <T> void add(String taskName, Callable callable, ResultProcess<T> resultProcess) {
+        asyncAdd(taskName, callable, resultProcess, 0);
+    }
+
+    public static <T> Future<T> future(Callable<T> callable) {
+        return GROUPS.get(0).service.submit(callable);
+    }
+
     public static void start() {
         start(0);
     }
@@ -184,8 +192,8 @@ public class SyncTaskRunner {
                 }
                 long endTime = System.currentTimeMillis();
                 if (!StringUtil.isEmpty(taskName)) {
-                    Map<String,Long> orderTime=new HashMap<>();
-                    orderTime.put(taskName,endTime-startTime);
+                    Map<String, Long> orderTime = new HashMap<>();
+                    orderTime.put(taskName, endTime - startTime);
                     group.orderPrintResults.add(orderTime);
                     LOGGER.info("task " + taskName + " is finish,the cost time is " + (endTime - startTime));
                 }
