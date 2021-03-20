@@ -28,6 +28,7 @@ public class SkbDataSourceConfig {
     //配置主数据库
     @Bean("skbDataSource")
     @Primary
+    @ConfigurationProperties(prefix = "spring.datasource.hikari.skb")
     public DataSource skbDataSource() {
         HikariDataSource skbDB = new HikariDataSource();
         skbDB.setDriverClassName(env.getProperty("spring.datasource.driver-class-name"));
