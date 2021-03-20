@@ -4,6 +4,7 @@ import com.rty.springboot.bean.JobInfoBean;
 import com.rty.springboot.bean.ResultInfo;
 import com.rty.springboot.util.SyncTaskRunner;
 import com.rty.springboot.web.service.IJobInfoService;
+import com.rty.springboot.web.service.IRuleService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -24,6 +25,9 @@ public class TestController extends AbstractContorller {
 
     @Autowired
     private IJobInfoService jobInfoService;
+
+    @Autowired
+    private IRuleService ruleService;
 
     @RequestMapping(value = "/sync", method = RequestMethod.GET)
     public ResultInfo<?> testSync() {
@@ -64,6 +68,20 @@ public class TestController extends AbstractContorller {
             List<JobInfoBean> result2 = future2.get();
             System.out.println("task2 is finish " + result2.size());
 
+            LOGGER.info("end sync add job");
+            return resultInfo;
+        } catch (Exception e) {
+            LOGGER.info("test sync fail", e);
+            return createFailResult("test sync fail");
+        }
+    }
+
+    @RequestMapping(value = "/db", method = RequestMethod.GET)
+    public ResultInfo<?> testDb() {
+        try {
+            LOGGER.info("start sync add job");
+            ResultInfo resultInfo = createSuccessResult("test sync successful");
+            resultInfo.setData(ruleService.getRuleInfos(new HashMap<>()));
             LOGGER.info("end sync add job");
             return resultInfo;
         } catch (Exception e) {

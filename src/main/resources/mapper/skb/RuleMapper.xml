@@ -3,4 +3,13 @@
         "http://ibatis.apache.org/dtd/ibatis-3-mapper.dtd">
 <mapper namespace="com.rty.springboot.web.mapper.skb.RuleMapper">
 
+    <select id="queryRuleInfos" resultType="com.rty.springboot.bean.RuleInfoBean">
+        select
+        RULE_NAME ruleName,
+        TOOL tool,
+        LANGUAGE language
+        from
+        t_skb_rule_info
+    </select>
+
 </mapper>
