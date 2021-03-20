@@ -1,6 +1,8 @@
 package com.rty.springboot.common.config.datasource;
 
 import com.zaxxer.hikari.HikariDataSource;
+import lombok.Getter;
+import lombok.Setter;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.context.properties.ConfigurationProperties;
@@ -13,6 +15,8 @@ import javax.sql.DataSource;
 
 @Configuration
 @ConfigurationProperties(prefix = "spring.datasource.skb")
+@Setter
+@Getter
 public class SkbDataSourceConfig {
     private String url;
     private String username;
@@ -23,12 +27,13 @@ public class SkbDataSourceConfig {
 
     //配置主数据库
     @Bean("skbDataSource")
-    public DataSource getReadDataSource() {
+    @Primary
+    public DataSource skbDataSource() {
         HikariDataSource skbDB = new HikariDataSource();
         skbDB.setDriverClassName(env.getProperty("spring.datasource.driver-class-name"));
         skbDB.setJdbcUrl(url);
-        skbDB.setPassword(username);
-        skbDB.setUsername(password);
+        skbDB.setPassword(password);
+        skbDB.setUsername(username);
         return skbDB;
     }
 }

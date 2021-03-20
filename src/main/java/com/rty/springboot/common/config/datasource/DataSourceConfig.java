@@ -21,7 +21,6 @@ public class DataSourceConfig {
 
     //配置主数据库
     @Bean("readDB")
-    @Primary
     public DataSource getReadDataSource() {
         HikariDataSource readDB = new HikariDataSource();
         readDB.setDriverClassName(env.getProperty("spring.datasource.driver-class-name"));

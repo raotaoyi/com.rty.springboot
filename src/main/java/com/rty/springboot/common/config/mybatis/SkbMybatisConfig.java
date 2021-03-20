@@ -20,22 +20,24 @@ import javax.sql.DataSource;
  * 场景:项目中既有mc的数据库，又有skb数据库
  */
 @Configuration
-@MapperScan(basePackages = "com.com.rty.springboot.web.mapper.skb", sqlSessionFactoryRef = "sqlSessionSkbFactory")
+@MapperScan(basePackages = "com.rty.springboot.web.mapper.skb", sqlSessionFactoryRef = "skbSqlSessionFactory")
 public class SkbMybatisConfig {
 
     @Resource(name = "skbDataSource")
     private DataSource dataSource;
 
-    @Bean("sqlSessionSkbFactory")
-    public SqlSessionFactory getSqlSessionFactory() throws Exception {
+    @Bean("skbSqlSessionFactory")
+    @Primary
+    public SqlSessionFactory skbSqlSessionFactory() throws Exception {
         SqlSessionFactoryBean sqlSessionFactoryBean = new SqlSessionFactoryBean();
         sqlSessionFactoryBean.setDataSource(dataSource);
         sqlSessionFactoryBean.setMapperLocations(new PathMatchingResourcePatternResolver().getResources("classpath:mapper/skb/*.xml"));
         return sqlSessionFactoryBean.getObject();
     }
 
-    @Bean("sqlSessionTemplate")
-    public SqlSessionTemplate getSqlSessionTemplate(@Qualifier("sqlSessionSkbFactory") SqlSessionFactory sqlSessionFactory) {
+    @Bean("skbSqlSessionTemplate")
+    @Primary
+    public SqlSessionTemplate skbSqlSessionTemplate(@Qualifier("skbSqlSessionFactory") SqlSessionFactory sqlSessionFactory) {
         return new SqlSessionTemplate(sqlSessionFactory);
     }
 

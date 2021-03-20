@@ -16,20 +16,20 @@ import javax.sql.DataSource;
 import java.io.IOException;
 
 @Configuration
-@MapperScan(basePackages = "com.com.rty.springboot.web.mapper.mc", sqlSessionFactoryRef = "sqlSessionMcFactory")
+@MapperScan(basePackages = "com.rty.springboot.web.mapper.mc", sqlSessionFactoryRef = "mcSqlSessionFactory")
 public class MybatisConfig {
     @Resource(name = "routingDataSource")
     private DataSource dataSource;
 
-    @Bean("sqlSessionMcFactory")
-    public SqlSessionFactory getSqlSessionFactory() throws Exception {
+    @Bean("mcSqlSessionFactory")
+    public SqlSessionFactory mcSqlSessionFactory() throws Exception {
         SqlSessionFactoryBean sqlSessionFactoryBean = new SqlSessionFactoryBean();
         sqlSessionFactoryBean.setDataSource(dataSource);
         sqlSessionFactoryBean.setMapperLocations(new PathMatchingResourcePatternResolver().getResources("classpath:mapper/mc/*.xml"));
         return sqlSessionFactoryBean.getObject();
     }
-    @Bean("sqlSessionTemplate")
-    public SqlSessionTemplate getSqlSessionTemplate(@Qualifier("sqlSessionMcFactory") SqlSessionFactory sqlSessionFactory) {
+    @Bean("mcSqlSessionTemplate")
+    public SqlSessionTemplate mcSqlSessionTemplate(@Qualifier("mcSqlSessionFactory") SqlSessionFactory sqlSessionFactory) {
         return new SqlSessionTemplate(sqlSessionFactory);
     }
 
