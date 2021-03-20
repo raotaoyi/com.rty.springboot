@@ -147,7 +147,22 @@ public class SyncTaskRunner {
         }
 
         private void orderPrintTime() {
-
+            orderPrintResults.sort(new Comparator<Map<String, Long>>() {
+                @Override
+                public int compare(Map<String, Long> o1, Map<String, Long> o2) {
+                    long value = (Long) (o2.values().toArray()[0]) - (Long) (o2.values().toArray()[0]);
+                    if (value > 0) {
+                        return 1;
+                    } else if (value == 0) {
+                        return 0;
+                    }
+                    return -1;
+                }
+            });
+            for (int i = 0; i < (orderPrintResults.size() < 50 ? orderPrintResults.size() : 50); i++) {
+                LOGGER.info("task " + orderPrintResults.get(i).keySet().toArray()[0] + " cost time "
+                        + orderPrintResults.get(i).values().toArray()[0]);
+            }
         }
     }
 
