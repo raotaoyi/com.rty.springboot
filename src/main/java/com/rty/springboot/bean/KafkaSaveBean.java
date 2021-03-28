@@ -1,17 +1,22 @@
 package com.rty.springboot.bean;
 
 
+import org.yaml.snakeyaml.Yaml;
+
 import java.io.IOException;
 import java.io.InputStream;
 import java.util.List;
 
+/**
+ * yaml的使用,集成到spring中，可以使用springboot的配置进行读取
+ */
 public class KafkaSaveBean {
     private List<KafkaSaveDb> kafkaSaveDbs;
 
     public static KafkaSaveBean loadConfig(String config) {
-/*        Yaml yaml = new Yaml();*/
+        Yaml yaml = new Yaml();
         try (InputStream is = KafkaSaveBean.class.getResourceAsStream("/saveDb.yaml")) {
-/*            return yaml.loadAs(is, KafkaSaveBean.class);*/
+            return yaml.loadAs(is, KafkaSaveBean.class);
         } catch (IOException e) {
             e.printStackTrace();
         }
