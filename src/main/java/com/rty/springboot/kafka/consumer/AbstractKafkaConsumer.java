@@ -1,6 +1,8 @@
 package com.rty.springboot.kafka.consumer;
 
 
+import org.apache.kafka.clients.consumer.ConsumerRecords;
+
 import java.util.Properties;
 
 public abstract class AbstractKafkaConsumer {
@@ -27,11 +29,11 @@ public abstract class AbstractKafkaConsumer {
 
     }
 
-    private void start() {
+    public void start() {
         if (!isStop) {
             throw new RuntimeException("consumer is running");
         }
-
+        isStop = false;
 
     }
 
@@ -43,7 +45,7 @@ public abstract class AbstractKafkaConsumer {
 
     }
 
-    protected abstract void process();
+    protected abstract void process(ConsumerRecords<String, String> records);
 
     private void sleep(long sleepTime) {
         try {
