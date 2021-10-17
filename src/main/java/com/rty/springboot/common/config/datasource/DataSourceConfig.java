@@ -54,6 +54,10 @@ public class DataSourceConfig {
         return myRoutingDataSource;
     }
 
+    /**
+     * 不同的事物数据源绑定不同的事物管理器（错误使用没有效果），
+     * 多数据源的事务时，要指定事务管理器，不然程序不知道使用哪一个
+     */
     @Bean("dataSourceTransactionManager")
     public DataSourceTransactionManager dataSourceTransactionManager(@Qualifier("routingDataSource") DataSource routingDataSource) {
         return new DataSourceTransactionManager(routingDataSource);

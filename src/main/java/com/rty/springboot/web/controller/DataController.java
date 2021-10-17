@@ -22,7 +22,7 @@ import java.util.UUID;
 @RestController
 @RequestMapping("/v1/gain")
 public class DataController extends AbstractContorller {
-    private static final Logger LOGGER = LoggerFactory.getLogger(DataController.class);
+    private static final Logger LOGGER = LoggerFactory.getLogger(com.rty.springboot.web.controller.McDataController.class);
 
     @Autowired
     private IProjectInfoService projectInfoService;
@@ -30,7 +30,7 @@ public class DataController extends AbstractContorller {
     @Autowired
     private IJobInfoService jobInfoService;
 
-    @RequestMapping(value = "/projectInfo", method = RequestMethod.POST)
+    @RequestMapping(value = "/projectInfo1", method = RequestMethod.POST)
     public ResultInfo<?> syncData(@RequestBody ProjectInfoBean projectInfoBean, HttpServletRequest request) {
         LOGGER.info("v1/gain/projectInfo");
         try {

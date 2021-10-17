@@ -21,8 +21,8 @@ import java.util.UUID;
 
 @RestController
 @RequestMapping("/v1/gain")
-public class DataController extends AbstractContorller {
-    private static final Logger LOGGER = LoggerFactory.getLogger(DataController.class);
+public class McDataController extends AbstractContorller {
+    private static final Logger LOGGER = LoggerFactory.getLogger(McDataController.class);
 
     @Autowired
     private IProjectInfoService projectInfoService;

@@ -2,12 +2,6 @@ package com.rty.springboot.test.dao;
 
 import com.rty.springboot.test.ApplicationTest;
 import com.rty.springboot.web.mapper.mc.UserMapper;
-import com.syscxp.sdk.common.ZSClient;
-import com.syscxp.sdk.common.ZSConfig;
-import com.syscxp.sdk.tunnel.ExtMonitorIcmpDataAction;
-import com.syscxp.sdk.tunnel.ExtMonitorIcmpDataResult;
-import com.syscxp.sdk.tunnel.GetL3VlanAutoAction;
-import com.syscxp.sdk.tunnel.GetL3VlanAutoResult;
 import org.junit.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 
@@ -35,18 +29,18 @@ public class UserMapperTest extends ApplicationTest {
         String SecretKey = "nD46UF0MB2qgjTGU5T5oZPfbEr0tZK";
 
         long now=System.currentTimeMillis();
-        ZSConfig.Builder builder = new ZSConfig.Builder()
-                .setDefaultPollingTimeout(1, TimeUnit.HOURS)
-                .setSecret(SecretId, SecretKey);
-        ZSClient.configure(builder.build());
-
-        ExtMonitorIcmpDataAction action = new ExtMonitorIcmpDataAction();
-        action.extMonitorUuid = "308df8d7935c41009be1e6635c9bf78b";
-        action.start = now - 10 * 6000;
-        action.end = now;
-
-        ExtMonitorIcmpDataResult result = action.call().throwExceptionIfError().value;
-        System.out.println(ZSClient.toPrettyJson(result));
+//        ZSConfig.Builder builder = new ZSConfig.Builder()
+//                .setDefaultPollingTimeout(1, TimeUnit.HOURS)
+//                .setSecret(SecretId, SecretKey);
+//        ZSClient.configure(builder.build());
+//
+//        ExtMonitorIcmpDataAction action = new ExtMonitorIcmpDataAction();
+//        action.extMonitorUuid = "308df8d7935c41009be1e6635c9bf78b";
+//        action.start = now - 10 * 6000;
+//        action.end = now;
+//
+//        ExtMonitorIcmpDataResult result = action.call().throwExceptionIfError().value;
+//        System.out.println(ZSClient.toPrettyJson(result));
     }
 
     public static String getMD5(String plainText, int length) {
