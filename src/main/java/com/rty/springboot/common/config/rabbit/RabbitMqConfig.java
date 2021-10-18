@@ -61,7 +61,7 @@ public class RabbitMqConfig {
     @Bean
     public RabbitTemplate rabbitTemplate() {
         RabbitTemplate template = new RabbitTemplate(connectionFactory());
-        //失败通知
+        //失败通知(在不可路由的情况下)
         template.setMandatory(true);
         //发送方确认
         template.setConfirmCallback(confirmCallback());

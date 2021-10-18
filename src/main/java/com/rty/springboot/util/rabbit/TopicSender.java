@@ -19,6 +19,7 @@ public class TopicSender {
         System.out.println("TopicSender send the 2st:" + msg2);
         this.rabbitTemplate.convertAndSend(RmConst.EXCHANGE_TOPIC, RmConst.RK_USER, msg2);
 
+        //失败者通知
         String msg3 = "i am error message msg======";
         System.out.println("TopicSender send the 3st:" + msg3);
         this.rabbitTemplate.convertAndSend(RmConst.EXCHANGE_TOPIC, "errorkey", msg3);
