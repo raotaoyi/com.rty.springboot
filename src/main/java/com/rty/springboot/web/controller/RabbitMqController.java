@@ -2,6 +2,7 @@ package com.rty.springboot.web.controller;
 
 import com.rty.springboot.bean.ResultInfo;
 import com.rty.springboot.util.rabbit.DefaultSender;
+import com.rty.springboot.util.rabbit.TopicSender;
 import com.rty.springboot.web.service.IRabbitProduceService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -21,6 +22,8 @@ public class RabbitMqController extends AbstractContorller {
 
     @Autowired
     private DefaultSender defaultSender;
+    @Autowired
+    private TopicSender topicSender;
 
     /**
      * 普通类型测试
@@ -41,6 +44,17 @@ public class RabbitMqController extends AbstractContorller {
         ResultInfo result = createSuccessResult("dire send");
         try {
             defaultSender.sendConfirm("user world dire");
+        } catch (Exception e) {
+            logger.info("dire send data fail", e);
+        }
+        return result;
+    }
+
+    @GetMapping("topic")
+    public ResultInfo<?> topicSend(HttpServletRequest request) {
+        ResultInfo result = createSuccessResult("topic send");
+        try {
+            topicSender.send();
         } catch (Exception e) {
             logger.info("dire send data fail", e);
         }
