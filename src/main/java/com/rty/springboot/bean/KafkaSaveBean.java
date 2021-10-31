@@ -6,6 +6,7 @@ import org.yaml.snakeyaml.Yaml;
 import java.io.IOException;
 import java.io.InputStream;
 import java.util.List;
+import java.util.Map;
 
 /**
  * yaml的使用,集成到spring中，可以使用springboot的配置进行读取
@@ -13,20 +14,19 @@ import java.util.List;
 public class KafkaSaveBean {
     private List<KafkaSaveDb> kafkaSaveDbs;
 
-    public static KafkaSaveBean loadConfig(String config) {
-        Yaml yaml = new Yaml();
-        try (InputStream is = KafkaSaveBean.class.getResourceAsStream("/saveDb.yaml")) {
-            return yaml.loadAs(is, KafkaSaveBean.class);
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-        return new KafkaSaveBean();
-    }
-
     public static class KafkaSaveDb {
         private String topic;
         private String groupId;
-        public boolean enable;
+        private boolean enable;
+        private List<Map<String, Object>> saves;
+
+        public List<Map<String, Object>> getSaves() {
+            return saves;
+        }
+
+        public void setSaves(List<Map<String, Object>> saves) {
+            this.saves = saves;
+        }
 
         public String getTopic() {
             return topic;
