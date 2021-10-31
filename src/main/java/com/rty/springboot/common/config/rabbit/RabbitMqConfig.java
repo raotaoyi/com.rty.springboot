@@ -20,7 +20,7 @@ import javax.annotation.Resource;
 /**
  * 1,使用顺序
  */
-@Configuration
+//@Configuration
 public class RabbitMqConfig {
     @Value("${spring.rabbitmq.host}")
     private String host;

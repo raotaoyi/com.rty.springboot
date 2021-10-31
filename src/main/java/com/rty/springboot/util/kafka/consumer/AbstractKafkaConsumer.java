@@ -58,7 +58,7 @@ public abstract class AbstractKafkaConsumer {
         final String thread = Thread.currentThread().getId() + "_" + System.currentTimeMillis();
         int failTimes = 0;
         while (!isStop) {
-            ConsumerRecords<String, String> consumerRecords = this.kafkaConsumer.poll(200);
+            ConsumerRecords<String, String> consumerRecords = this.kafkaConsumer.poll(500);
             try {
                 if (consumerRecords.isEmpty()) {
                     continue;

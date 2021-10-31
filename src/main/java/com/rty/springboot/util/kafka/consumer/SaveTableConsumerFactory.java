@@ -18,11 +18,12 @@ public class SaveTableConsumerFactory {
 
     @PostConstruct
     public void init() {
-        FileUtil.loadYamlConfig("/saveDb.yaml").getKafkaSaveDbs()
-                .stream()
-                .filter(kafkaSaveDb -> kafkaSaveDb.isEnable())
-                .map(kafkaSaveDb -> new KafkaSaveTableConsumer(kafkaSaveDb.getTopic(), kafkaSaveDb.getGroupId(), createPreProcess(), createDataSaveStrategy(kafkaSaveDb)))
-                .forEach(kafkaSaveTableConsumer -> kafkaSaveTableConsumer.start());
+//        FileUtil.loadYamlConfig("/saveDb.yaml").getKafkaSaveDbs()
+//                .stream()
+//                .filter(kafkaSaveDb -> kafkaSaveDb.isEnable())
+//                .map(kafkaSaveDb -> new KafkaSaveTableConsumer(kafkaSaveDb.getTopic(), kafkaSaveDb.getGroupId(), createPreProcess(), createDataSaveStrategy(kafkaSaveDb)))
+//                .forEach(kafkaSaveTableConsumer -> kafkaSaveTableConsumer.start());
+        new KafkaSaveTableConsumer("group.id1", "test", null, null).start();
     }
 
     public List<PreProcess> createPreProcess() {
