@@ -1,16 +1,15 @@
-package com.rty.springboot.util.kafka;
+package com.rty.springboot.util.kafka.consumer;
 
-import com.rty.springboot.web.controller.RabbitMqController;
+import org.apache.kafka.clients.consumer.ConsumerConfig;
 import org.apache.kafka.clients.consumer.ConsumerRecords;
 import org.apache.kafka.clients.consumer.KafkaConsumer;
 import org.apache.kafka.clients.consumer.OffsetAndMetadata;
 import org.apache.kafka.common.TopicPartition;
+import org.apache.kafka.common.serialization.StringDeserializer;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import java.util.HashMap;
-import java.util.Map;
-import java.util.Properties;
+import java.util.*;
 import java.util.concurrent.Executor;
 import java.util.concurrent.Executors;
 
@@ -24,14 +23,20 @@ public abstract class AbstractKafkaConsumer {
 
     private Properties getProperties() {
         Properties properties = new Properties();
+        properties.put("bootstrap.servers", "127.0.0.1:9092");
+        properties.put("key.deserializer", StringDeserializer.class);
+        properties.put("value.deserializer", StringDeserializer.class);
+        properties.put("enable.auto.commit", false);//表明消费者是否是自动提交偏移量，默认为true
+        properties.put("max.poll.records", 500);//控制每次pull方法返回的记录数量，默认为500
         return properties;
     }
 
     public AbstractKafkaConsumer(String groupId, String... topics) {
         Properties properties = getProperties();
-        properties.setProperty("", groupId);
+        properties.setProperty(ConsumerConfig.GROUP_ID_CONFIG, groupId);
         KafkaConsumer<String, String> kafkaConsumer = new KafkaConsumer<String, String>(properties);
         this.kafkaConsumer = kafkaConsumer;
+        this.kafkaConsumer.subscribe(Arrays.asList(topics));
     }
 
     public synchronized void stop() {
@@ -50,6 +55,7 @@ public abstract class AbstractKafkaConsumer {
     }
 
     public void consumer() {
+        final String thread = Thread.currentThread().getId() + "_" + System.currentTimeMillis();
         int failTimes = 0;
         while (!isStop) {
             ConsumerRecords<String, String> consumerRecords = this.kafkaConsumer.poll(200);
@@ -65,7 +71,7 @@ public abstract class AbstractKafkaConsumer {
                     submitOffsets(consumerRecords);
                     failTimes = 0;
                 }
-                logger.error(e.getMessage());
+                logger.error(thread + " is error,the cause reason is " + e.getMessage());
                 sleep(2000);
             }
         }
@@ -82,7 +88,7 @@ public abstract class AbstractKafkaConsumer {
         kafkaConsumer.commitSync(offsetMap);
     }
 
-    public abstract void process(ConsumerRecords consumerRecords);
+    public abstract void process(ConsumerRecords<String, String> consumerRecords);
 
     private void sleep(long time) {
         try {

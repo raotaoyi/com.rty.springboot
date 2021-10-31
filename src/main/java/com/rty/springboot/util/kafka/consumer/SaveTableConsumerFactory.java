@@ -1,4 +1,4 @@
-package com.rty.springboot.util.kafka;
+package com.rty.springboot.util.kafka.consumer;
 
 import com.rty.springboot.bean.KafkaSaveBean;
 import com.rty.springboot.util.FileUtil;

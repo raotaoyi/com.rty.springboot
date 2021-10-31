@@ -1,4 +1,4 @@
-package com.rty.springboot.util.kafka;
+package com.rty.springboot.util.kafka.consumer;
 
 import java.util.List;
 import java.util.Map;
