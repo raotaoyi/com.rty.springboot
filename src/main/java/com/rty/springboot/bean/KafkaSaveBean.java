@@ -18,13 +18,14 @@ public class KafkaSaveBean {
         private String topic;
         private String groupId;
         private boolean enable;
-        private List<Map<String, Object>> saves;
+        private List<KafkaSaveDbConf> saves;
 
-        public List<Map<String, Object>> getSaves() {
+
+        public List<KafkaSaveDbConf> getSaves() {
             return saves;
         }
 
-        public void setSaves(List<Map<String, Object>> saves) {
+        public void setSaves(List<KafkaSaveDbConf> saves) {
             this.saves = saves;
         }
 
@@ -50,6 +51,27 @@ public class KafkaSaveBean {
 
         public void setEnable(boolean enable) {
             this.enable = enable;
+        }
+    }
+
+    public static class KafkaSaveDbConf {
+        private String type;
+        private Map<String, String> params;
+
+        public String getType() {
+            return type;
+        }
+
+        public void setType(String type) {
+            this.type = type;
+        }
+
+        public Map<String, String> getParams() {
+            return params;
+        }
+
+        public void setParams(Map<String, String> params) {
+            this.params = params;
         }
     }
 

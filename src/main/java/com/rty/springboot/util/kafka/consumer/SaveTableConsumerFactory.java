@@ -18,12 +18,15 @@ public class SaveTableConsumerFactory {
 
     @PostConstruct
     public void init() {
-//        FileUtil.loadYamlConfig("/saveDb.yaml").getKafkaSaveDbs()
-//                .stream()
-//                .filter(kafkaSaveDb -> kafkaSaveDb.isEnable())
-//                .map(kafkaSaveDb -> new KafkaSaveTableConsumer(kafkaSaveDb.getTopic(), kafkaSaveDb.getGroupId(), createPreProcess(), createDataSaveStrategy(kafkaSaveDb)))
-//                .forEach(kafkaSaveTableConsumer -> kafkaSaveTableConsumer.start());
-        new KafkaSaveTableConsumer("group.id1", "test", null, null).start();
+        KafkaSaveBean kafkaSaveBean = FileUtil.loadYamlConfig("/saveDb.yaml");
+        if (kafkaSaveBean == null) {
+            throw new RuntimeException("kafka save yaml fail");
+        }
+        kafkaSaveBean.getKafkaSaveDbs()
+                .stream()
+                .filter(kafkaSaveDb -> kafkaSaveDb.isEnable())
+                .map(kafkaSaveDb -> new KafkaSaveTableConsumer(kafkaSaveDb.getTopic(), kafkaSaveDb.getGroupId(), createPreProcess(), createDataSaveStrategy(kafkaSaveDb)))
+                .forEach(kafkaSaveTableConsumer -> kafkaSaveTableConsumer.start());
     }
 
     public List<PreProcess> createPreProcess() {
@@ -34,8 +37,8 @@ public class SaveTableConsumerFactory {
     public List<DataSaveStrategy> createDataSaveStrategy(KafkaSaveBean.KafkaSaveDb saveDb) {
         List<DataSaveStrategy> dataSaveStrategies = new ArrayList<>();
         saveDb.getSaves().stream().forEach(save -> {
-            if ("mysql".equalsIgnoreCase((String) save.get("type"))) {
-                dataSaveStrategies.add(new MysqlSaveStrategyImpl());
+            if ("mysql".equalsIgnoreCase(save.getType())) {
+//                dataSaveStrategies.add(new MysqlSaveStrategyImpl(save.getDbParams(), jdbcTemplate));
             }
         });
         return dataSaveStrategies;

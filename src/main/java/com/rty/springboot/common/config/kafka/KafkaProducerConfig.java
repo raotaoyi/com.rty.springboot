@@ -8,7 +8,7 @@ import org.springframework.stereotype.Component;
 
 import java.util.Properties;
 
-//@Component
+@Component
 public class KafkaProducerConfig {
 
     @Bean

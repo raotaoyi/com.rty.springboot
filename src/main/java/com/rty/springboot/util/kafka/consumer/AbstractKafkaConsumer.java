@@ -61,10 +61,12 @@ public abstract class AbstractKafkaConsumer {
             ConsumerRecords<String, String> consumerRecords = this.kafkaConsumer.poll(500);
             try {
                 if (consumerRecords.isEmpty()) {
+                    sleep(2000);
                     continue;
                 }
                 process(consumerRecords);
                 submitOffsets(consumerRecords);
+                failTimes = 0;
             } catch (Exception e) {
                 failTimes++;
                 if (failTimes > 6) {

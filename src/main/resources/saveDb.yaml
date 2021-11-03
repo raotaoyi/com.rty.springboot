@@ -1,13 +1,8 @@
--kafkaSaveDbs:
-  topic: t_mc_job_info_realtime_topic
-  groupId: t_mc_job_info_realtime_group
-  preprocesses:
-    -className:
-      params:
-        -from:
-          to:
-  enable: true
-  saves:
-    -type: mysql
-      params:
-        tableName: t_mc_job_info_realtime
+kafkaSaveDbs:
+  - topic: test
+    groupId: test.group1
+    enable: true
+    saves:
+      - type: mysql
+        params:
+          tableName: t_mc_job_info_realtime
