@@ -73,7 +73,7 @@ public abstract class AbstractKafkaConsumer {
                     submitOffsets(consumerRecords);
                     failTimes = 0;
                 }
-                logger.error(thread + " is error,the cause reason is " + e.getMessage());
+                logger.error(thread + " is error,the cause reason is ", e);
                 sleep(2000);
             }
         }

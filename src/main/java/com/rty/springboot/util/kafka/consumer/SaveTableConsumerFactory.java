@@ -25,7 +25,7 @@ public class SaveTableConsumerFactory {
         kafkaSaveBean.getKafkaSaveDbs()
                 .stream()
                 .filter(kafkaSaveDb -> kafkaSaveDb.isEnable())
-                .map(kafkaSaveDb -> new KafkaSaveTableConsumer(kafkaSaveDb.getTopic(), kafkaSaveDb.getGroupId(), createPreProcess(), createDataSaveStrategy(kafkaSaveDb)))
+                .map(kafkaSaveDb -> new KafkaSaveTableConsumer(kafkaSaveDb.getGroupId(), createPreProcess(), createDataSaveStrategy(kafkaSaveDb), kafkaSaveDb.getTopic()))
                 .forEach(kafkaSaveTableConsumer -> kafkaSaveTableConsumer.start());
     }
 
@@ -38,7 +38,7 @@ public class SaveTableConsumerFactory {
         List<DataSaveStrategy> dataSaveStrategies = new ArrayList<>();
         saveDb.getSaves().stream().forEach(save -> {
             if ("mysql".equalsIgnoreCase(save.getType())) {
-//                dataSaveStrategies.add(new MysqlSaveStrategyImpl(save.getDbParams(), jdbcTemplate));
+                dataSaveStrategies.add(new MysqlSaveStrategyImpl(save.getParams(), jdbcTemplate));
             }
         });
         return dataSaveStrategies;
