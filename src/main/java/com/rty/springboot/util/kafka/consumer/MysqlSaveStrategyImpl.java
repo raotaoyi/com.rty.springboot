@@ -16,8 +16,10 @@ public class MysqlSaveStrategyImpl implements DataSaveStrategy {
     @Override
     public void save(List<? extends Map<String, ?>> beans) {
         List<Object[]> values = new ArrayList<>();
-        Set<String> columns = new HashSet<>();
-        beans.forEach(bean -> columns.addAll(bean.keySet()));
+        List<String> columns = new ArrayList<>();
+        Set<String> columnSets = new HashSet<>();
+        beans.forEach(bean -> columnSets.addAll(bean.keySet()));
+        columns.addAll(columnSets);
         beans.forEach(bean -> {
             Object[] object = new Object[columns.size()];
             int flag = 0;
@@ -33,10 +35,11 @@ public class MysqlSaveStrategyImpl implements DataSaveStrategy {
     /**
      * 执行20次，如果成功了直接返回，失败了重试20次，每次间隔30秒，
      */
-    private void executeSqlWithRetry(Set<String> columns, List<Object[]> values) {
+    private void executeSqlWithRetry(List<String> columns, List<Object[]> values) {
         for (int i = 0; i < 20; i++) {
             try {
                 //TODO 数据库操作
+                String sql = "insert into";
                 return;
 
             } catch (Exception e) {

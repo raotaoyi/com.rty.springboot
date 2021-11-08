@@ -22,13 +22,14 @@ public class KafkaServiceImpl implements IKafkaService {
                 , demoUser.toString());
         kafkaProducer.send(record, (recordMetadata, e) -> {
             if (null != e) {
-                e.printStackTrace();
+                throw new RuntimeException("数据发送失败", e);
             }
             if (null != recordMetadata) {
                 System.out.println("offet:" + recordMetadata.offset() + "-" + "partition:" +
                         recordMetadata.partition() + "-" + "topic:" + recordMetadata.topic());
             }
             System.out.println(demoUser.getId() + "数据[" + record + "]已发送");
+
         });
 
     }

@@ -33,4 +33,17 @@ public class DBContextHolder {
         logger.info("its aready master db");
 
     }
+
+    public static void skb() {
+        set(DBTypeEnum.SKB);
+        logger.info("its aready master db");
+
+    }
+
+    /**
+     * 清理
+     */
+    public static void clear() {
+        contextHolder.remove();
+    }
 }

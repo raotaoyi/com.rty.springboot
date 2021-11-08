@@ -32,9 +32,10 @@ public class KafkaController extends AbstractContorller {
             user.setUsername("jack");
             user.setPassword("777777");
             kafkaService.sent("test", user);
+            return result;
         } catch (Exception e) {
             logger.info("dire send data fail", e);
+            return createFailResult("dire send fail");
         }
-        return result;
     }
 }

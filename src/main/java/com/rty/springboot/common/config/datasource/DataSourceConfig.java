@@ -43,11 +43,13 @@ public class DataSourceConfig {
 
     @Bean("routingDataSource")
     public DataSource myRoutingDataSource(@Qualifier("readDB") DataSource readDataSource,
-                                          @Qualifier("writeDB") DataSource writeDataSource
+                                          @Qualifier("writeDB") DataSource writeDataSource,
+                                          @Qualifier("skbDataSource") DataSource skbDataSource
     ) {
         Map<Object, Object> targetDataSources = new HashMap<>();
         targetDataSources.put(DBTypeEnum.READ, readDataSource);
         targetDataSources.put(DBTypeEnum.WRITE, writeDataSource);
+        targetDataSources.put(DBTypeEnum.SKB, skbDataSource);
         MyRoutingDataSource myRoutingDataSource = new MyRoutingDataSource();
         myRoutingDataSource.setDefaultTargetDataSource(readDataSource);
         myRoutingDataSource.setTargetDataSources(targetDataSources);
