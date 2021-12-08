@@ -14,7 +14,6 @@ import org.springframework.scheduling.annotation.EnableScheduling;
 @EnableAsync
 @EnableCaching
 public class RTYSpringBootApplication {
-
     public static void main(String[] args) {
         SpringApplication.run(RTYSpringBootApplication.class, args);
 
